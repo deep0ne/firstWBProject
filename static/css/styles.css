@@ -1,0 +1,14 @@
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+}
+
+body {background-color: rgba(250, 66, 200, .15);}
+
+.align-left{
+    text-align: left;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order Information</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <h1>Order Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order UID</th>
+                <th>Track Number</th>
+                <th>Entry</th>
+                <th>Delivery</th>
+                <th>Items</th>
+                <th>Locale</th>
+                <th>Internal Signature</th>
+                <th>Customer ID</th>
+                <th>Delivery Service</th>
+                <th>Shard Key</th>
+                <th>SM ID</th>
+                <th>Date Created</th>
+                <th>OOF Shard</th>
+                <th>Transaction ID</th>
+                <th>Request ID</th>
+                <th>Currency</th>
+                <th>Provider</th>
+                <th>Amount</th>
+                <th>Payment Date</th>
+                <th>Bank</th>
+                <th>Delivery Cost</th>
+                <th>Goods Total</th>
+                <th>Custom Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{.OrderUID}}</td>
+                <td>{{.TrackNumber}}</td>
+                <td>{{.Entry}}</td>
+                <td class="align-left">
+                    <ul>
+                    {{range $key, $value := unmarshalDelivery .Delivery}}
+                        <li><strong>{{$key}}</strong>: {{$value}}</li>
+                    {{end}}
+                    </ul>
+                </td>
+                <td class="align-left">
+                    <ul>
+                    {{range $key, $items := unmarshalItems .Items}}
+                        {{range $name, $value := $items}}
+                        <li><strong>{{$name}}</strong>: {{$value}}</li>
+                        {{end}}
+                    {{end}}
+                    </ul>
+                </td>
+                <td>{{.Locale}}</td>
+                <td>{{.InternalSign}}</td>
+                <td>{{.CustomerID}}</td>
+                <td>{{.DeliveryService}}</td>
+                <td>{{.ShardKey}}</td>
+                <td>{{.SmID}}</td>
+                <td>{{.DateCreated.Format "02-01-2006"}}</td>
+                <td>{{.OofShard}}</td>
+                <td>{{.TransactionID}}</td>
+                <td>{{.RequestID}}</td>
+                <td>{{.Currency}}</td>
+                <td>{{.Provider}}</td>
+                <td>{{.Amount}}</td>
+                <td>{{parseTime .PaymentDt}}</td>
+                <td>{{.Bank}}</td>
+                <td>{{.DeliveryCost}}</td>
+                <td>{{.GoodsTotal}}</td>
+                <td>{{.CustomFee}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
