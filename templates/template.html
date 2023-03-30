@@ -59,7 +59,12 @@
                     </ul>
                 </td>
                 <td>{{.Locale}}</td>
-                <td>{{.InternalSign}}</td>
+                <td>{{if .InternalSign}}
+                        {{.InternalSign}}
+                    {{else}}
+                        {{"NO DATA"}}
+                    {{end}}
+                </td>
                 <td>{{.CustomerID}}</td>
                 <td>{{.DeliveryService}}</td>
                 <td>{{.ShardKey}}</td>
@@ -67,7 +72,12 @@
                 <td>{{.DateCreated.Format "02-01-2006"}}</td>
                 <td>{{.OofShard}}</td>
                 <td>{{.TransactionID}}</td>
-                <td>{{.RequestID}}</td>
+                <td>{{if .RequestID}}
+                        {{.RequestID}}
+                    {{else}}
+                        {{"NO DATA"}}
+                    {{end}}
+                </td>
                 <td>{{.Currency}}</td>
                 <td>{{.Provider}}</td>
                 <td>{{.Amount}}</td>
