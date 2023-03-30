@@ -30,16 +30,20 @@ func (server *Server) getOrder(ctx *gin.Context) {
 		return
 	}
 
-	t, _ := template.New("").Funcs(template.FuncMap{
+	t, err := template.New("").Funcs(template.FuncMap{
 		"unmarshalDelivery": utils.UnmarshalDelivery,
 		"unmarshalItems":    utils.UnmarshalItems,
 		"parseTime":         utils.ParseUnix,
 	}).ParseFiles("templates/template.html")
 
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+	}
+
 	ctx.Header("Content-Type", "text/html; charset=utf-8")
 	err = t.ExecuteTemplate(ctx.Writer, "template.html", order)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 }

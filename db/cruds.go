@@ -105,6 +105,8 @@ func (db *Database) SelectOrder(orderUID string) (models.Order, error) {
 		return models.Order{}, err
 	}
 
+	defer rows.Close()
+
 	var order models.Order
 	for rows.Next() {
 		err = rows.Scan(&order)
