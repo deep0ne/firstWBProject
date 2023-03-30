@@ -1,4 +1,4 @@
-CREATE TABLE "order_info" (
+CREATE TABLE IF NOT EXISTS "order_info" (
   "order_uid" varchar PRIMARY KEY NOT NULL,
   "track_number" varchar NOT NULL,
   "entry" varchar,
@@ -14,7 +14,7 @@ CREATE TABLE "order_info" (
   "oof_shard" varchar
 );
 
-CREATE TABLE "payment" (
+CREATE TABLE IF NOT EXISTS "payment" (
   "transaction" varchar PRIMARY KEY NOT NULL,
   "request_id" varchar,
   "currency" varchar,
