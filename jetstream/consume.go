@@ -34,7 +34,7 @@ func ConsumeOrders(js nats.JetStreamContext) ([]models.Order, error) {
 				return orders, err
 			}
 			orders = append(orders, order)
-			log.Printf("Order with UID %s is consumed and is going to postgres...\n", order.OrderInfo.OrderUID)
+			log.Printf("Order with UID %s has been consumed...\n", order.OrderInfo.OrderUID)
 		}
 	}
 }
