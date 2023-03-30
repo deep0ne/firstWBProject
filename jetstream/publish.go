@@ -43,7 +43,6 @@ func CreateOrders(js nats.JetStreamContext) error {
 			continue
 		}
 
-		// publish to REVIEWS.rateGiven subject
 		_, err = js.Publish(subjectName, orderJSON)
 		if err != nil {
 			return err
