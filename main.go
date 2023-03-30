@@ -19,6 +19,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	defer store.Close()
+
 	dbWithCache := db.NewDBWithCache(store)
 	err = dbWithCache.RecoverCache()
 	if err != nil {
