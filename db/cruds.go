@@ -48,7 +48,7 @@ func (db *Database) RecoverCache() error {
 	var orders []models.Order
 	err := db.db.Select(&orders, "SELECT * FROM order_info o FULL OUTER JOIN payment p ON o.order_uid = p.transaction")
 	if len(orders) == 0 || err != nil {
-		return errors.New("Datatbase is empty!")
+		return errors.New("Database is empty!")
 	}
 
 	log.Println("Recovering cache from the database...")
