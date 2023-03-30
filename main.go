@@ -6,19 +6,15 @@ import (
 	"github.com/deep0ne/firstWBProject/api"
 	"github.com/deep0ne/firstWBProject/db"
 	"github.com/deep0ne/firstWBProject/jetstream"
+	"github.com/deep0ne/firstWBProject/utils"
 	"github.com/jmoiron/sqlx"
-)
-
-const (
-	dbDriver      = "pgx"
-	postgreSQL    = "postgresql://root:wbpass@localhost:5432/wborders?sslmode=disable"
-	serverAddress = "0.0.0.0:8081"
 )
 
 func main() {
 
 	orders := jetstream.JetStreamLaunch()
-	store, err := sqlx.Connect(dbDriver, postgreSQL)
+	cfg := utils.NewConfig()
+	store, err := sqlx.Connect(cfg.DBDriver, cfg.DBSource)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,7 +27,7 @@ func main() {
 	dbWithCache.FillDataIntoDB(orders)
 
 	server, err := api.NewServer(dbWithCache)
-	err = server.Start(serverAddress)
+	err = server.Start(cfg.ServerAddress)
 	if err != nil {
 		log.Fatal("cannot start server", err)
 	}

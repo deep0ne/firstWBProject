@@ -16,10 +16,10 @@ migratedown:
 nats:
 	docker run --network host -p 4222:4222 -d nats -js
 
-jetstream-start:
-	go run ./jetstream/main.go
-
 server:
 	go run main.go
 
-.PHONY: postgres createdb dropdb migrateup migratedown nats
+testdb:
+	go test ./db/
+
+.PHONY: postgres createdb dropdb migrateup migratedown nats testdb
